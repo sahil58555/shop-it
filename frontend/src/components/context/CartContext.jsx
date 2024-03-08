@@ -11,14 +11,16 @@ export const CartContextProvider= ({children})=>{
 
     const addToCart=(newProduct)=>{
         let flag=false;
-        setCurrentCart((prev)=>prev.map((product)=>{
+        console.log("New Product",newProduct);
+        const products=currentCart.map((product)=>{
             if(product.id===newProduct.id){
                 product.quantity+=newProduct.quantity;
                 flag=true;
             }
             return product;
-        }));
-        if(!flag){
+        });
+        if(flag==true)  setCurrentCart(products);
+        else{
             setCurrentCart((prev)=>[...prev,newProduct]);
         }
     }
