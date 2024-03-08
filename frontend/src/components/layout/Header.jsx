@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Header = () => {
+  const {currentCart} = useContext(CartContext);
+  const quantity = currentCart.reduce((n,{quantity})=>n+quantity,0);
   return (
     <nav className="navbar row">
       <div className="col-12 col-md-3 ps-5">
@@ -20,7 +23,6 @@ const Header = () => {
               className="form-control"
               placeholder="Enter Product Name ..."
               name="keyword"
-              value=""
             />
             <button id="search_btn" className="btn" type="submit">
               <i className="fa fa-search" aria-hidden="true"></i>
@@ -35,7 +37,7 @@ const Header = () => {
             Cart{" "}
           </span>
           <span className="ms-1" id="cart_count">
-            0
+            {quantity}
           </span>
         </a>
 

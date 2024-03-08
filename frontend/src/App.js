@@ -1,6 +1,6 @@
 import "./App.css";
 
-import {  Routes, Route } from "react-router-dom";
+import {  Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Home from "./components/Home";
 
@@ -20,14 +20,16 @@ function App() {
         <Header />
 
         <div className="container">
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart/>} />
-            <Route path="/me/orders" element={<MyOrders/>}/>
-            <Route path="/me/profile" element={<Profile/>}/>
-            <Route path="/login" element={<Login/>}/>
-          </Routes>
+          <BrowserRouter>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart/>} />
+              <Route path="/me/orders" element={<MyOrders/>}/>
+              <Route path="/me/profile" element={<Profile/>}/>
+              <Route path="/login" element={<Login/>}/>
+            </Routes>
+          </BrowserRouter>
         </div>
 
         <Footer />

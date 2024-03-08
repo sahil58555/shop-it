@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../redux/api/productsApi";
 import { toast } from "react-hot-toast";
 import Loader from "../layout/Loader";
 import StarRatings from "react-star-ratings";
 import MetaData from "../layout/MetaData";
+import { CartContext } from "../context/CartContext";
+import { current } from "@reduxjs/toolkit";
 
 const ProductDetails = () => {
   const params = useParams();
+  const [quantity,setQuantity] = useState(1);
+  const {addToCart} = useContext(CartContext);
 
   const { data, isLoading, error, isError } = useGetProductDetailsQuery(
     params?.id
@@ -31,6 +35,16 @@ const ProductDetails = () => {
   }, [isError]);
 
   if (isLoading) return <Loader />;
+
+  const handleAddToCart = ()=>{
+    addToCart({
+      id: product?._id,
+      name:product.name,
+      image:product?.images[0],
+      price: product?.price,
+      quantity: quantity,
+    })
+  }
 
   return (
     <>
@@ -90,20 +104,23 @@ const ProductDetails = () => {
 
           <p id="product_price">${product?.price}</p>
           <div className="stockCounter d-inline">
-            <span className="btn btn-danger minus">-</span>
+            <span className="btn btn-danger minus" onClick={()=>{setQuantity((prev)=>prev-1)}}>-</span>
             <input
               type="number"
               className="form-control count d-inline"
-              value="1"
-              readonly
+              value={quantity}
+              onChange={(e)=>{
+                  setQuantity(parseInt(e.target.value)||0);
+              }}
             />
-            <span className="btn btn-primary plus">+</span>
+            <span className="btn btn-primary plus" onClick={()=>{setQuantity((prev)=>prev+1)}}>+</span>
           </div>
           <button
             type="button"
             id="cart_btn"
             className="btn btn-primary d-inline ms-4"
             disabled=""
+            onClick={handleAddToCart}
           >
             Add to Cart
           </button>
