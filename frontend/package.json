@@ -41,6 +41,6 @@
       "last 1 safari version"
     ]
   },
-  "allowedHosts": ["shopit-wvfy.onrender"],
+  "allowedHosts": ["shopit-wvfy.onrender", "shop-it-2kh1.onrender.com"],
   "proxy": "http://localhost:3000"
 }

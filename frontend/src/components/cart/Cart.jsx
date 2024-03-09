@@ -8,6 +8,7 @@ export const Cart = () => {
   const quantity = currentCart.reduce((n,{quantity})=>n+quantity,0);
   const price = currentCart.reduce((n,{quantity,price})=>n+quantity*price,0).toFixed(2);
   console.log("Cart Status",currentCart);
+  console.log("aaaaaaaa");
   return (
     <>
       <MetaData http-equiv="Content-Security-Policy"   title={"Buy Best Products Online"} />
