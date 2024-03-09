@@ -46,6 +46,7 @@ const ProductDetails = () => {
     })
   }
 
+  console.log("clicked");
   return (
     <>
       <MetaData http-equiv="Content-Security-Policy"  title={"Product Details"} />
